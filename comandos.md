@@ -1,4 +1,4 @@
-# go mod init modulo
+# go mod init "nome-modulo"
 
 ## Inicia um módulo
 
