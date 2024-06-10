@@ -5,3 +5,7 @@
 # go build
 
 ## Compilar arquivos do módulo e gerar executavel
+
+# go get "url"
+
+## Instala pacote externo
