@@ -77,3 +77,31 @@ func (repositorio Usuarios) Buscar(nomeOuNick string) ([]modelos.Usuario, error)
 
 	return usuarios, nil
 }
+
+// Buscar por id traz um único usuário do banco de dados
+func (repostorio Usuarios) BuscarPorID(ID uint64) (modelos.Usuario, error) {
+	linhas, erro := repostorio.db.Query(
+		"select id, nome, nick, email, criadoEm from usuarios where id = ?",
+		ID,
+	)
+
+	if erro != nil {
+		return modelos.Usuario{}, erro
+	}
+
+	var usuario modelos.Usuario
+
+	if linhas.Next() {
+		if erro = linhas.Scan(
+			&usuario.ID,
+			&usuario.Nome,
+			&usuario.Nick,
+			&usuario.Email,
+			&usuario.CriadoEm,
+		); erro != nil {
+			return modelos.Usuario{}, erro
+		}
+	}
+
+	return usuario, nil
+}
