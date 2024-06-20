@@ -354,6 +354,11 @@ func AtualizarSenha(w http.ResponseWriter, r *http.Request) {
 
 	corpoRequisicao, erro := io.ReadAll(r.Body)
 
+	if erro != nil {
+		respostas.Erro(w, http.StatusForbidden, erro)
+		return
+	}
+
 	var senha modelos.Senha
 	if erro = json.Unmarshal(corpoRequisicao, &senha); erro != nil {
 		respostas.Erro(w, http.StatusBadRequest, erro)
