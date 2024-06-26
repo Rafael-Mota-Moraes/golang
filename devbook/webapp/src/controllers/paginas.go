@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
+	"webapp/src/config"
 	"webapp/src/utils"
 )
 
@@ -17,5 +19,9 @@ func CarregarPaginaDeCadastroDeUsuario(w http.ResponseWriter, r *http.Request) {
 
 // CarregarPagina principal carrega a home do site
 func CarregarPaginaPrincipal(w http.ResponseWriter, r *http.Request) {
+	url := fmt.Sprintf("%s/publicacoes", config.APIURL)
+	response, erro := http.Get(url)
+
+	fmt.Println(response.StatusCode, erro)
 	utils.ExecutarTemplate(w, "home.html", nil)
 }
